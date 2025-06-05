@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pengaturan - Finance App</title>
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Navbar & Sidebar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FinanceApp</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hi, Nama_User
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html">Profil Saya</a></li>
+              <li><a class="dropdown-item" href="settings.html">Pengaturan</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="auth/login.html?logout=1">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard_user.html">
+                <span class="menu-icon" data-feather="home"></span>
+                <span class="menu-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="accounts_list.html">
+                <span class="menu-icon" data-feather="credit-card"></span>
+                <span class="menu-text">Akun</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories_list.html">
+                <span class="menu-icon" data-feather="list"></span>
+                <span class="menu-text">Kategori</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="transactions_list.html">
+                <span class="menu-icon" data-feather="file-text"></span>
+                <span class="menu-text">Transaksi</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="budgets_list.html">
+                <span class="menu-icon" data-feather="bar-chart-2"></span>
+                <span class="menu-text">Anggaran</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Konten Pengaturan -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
+        <div class="row mb-3">
+          <div class="col">
+            <h4>Pengaturan Akun & Aplikasi</h4>
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- 
+              Contoh untuk error/sukses:
+              <div class="alert alert-danger">Pilihan tidak valid.</div>
+              <div class="alert alert-success">Pengaturan berhasil disimpan.</div>
+            -->
+            <form id="settingsForm" action="settings_process.php" method="post" novalidate>
+              <div class="mb-3">
+                <label for="theme" class="form-label">Tema Tampilan</label>
+                <select id="theme" name="theme" class="form-select">
+                  <option value="light" selected>Light</option>
+                  <option value="dark">Dark</option>
+                </select>
+              </div>
+              <div class="mb-3 form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="notif_email"
+                  name="notif_email"
+                  checked
+                />
+                <label class="form-check-label" for="notif_email">Notifikasi via Email</label>
+              </div>
+              <div class="mb-3">
+                <label for="currency_default" class="form-label">Mata Uang Default</label>
+                <select id="currency_default" name="currency_default" class="form-select" required>
+                  <option value="IDR" selected>IDR</option>
+                  <option value="USD">USD</option>
+                  <option value="EUR">EUR</option>
+                </select>
+                <div class="invalid-feedback">
+                  Mata uang default wajib dipilih.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Simpan Pengaturan</button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="assets/js/scripts.js"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>
