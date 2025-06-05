@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Daftar Transaksi - Finance App</title>
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Navbar & Sidebar (User/Admin) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FinanceApp</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hi, Nama_User
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html">Profil Saya</a></li>
+              <li><a class="dropdown-item" href="settings.html">Pengaturan</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="auth/login.html?logout=1">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <!-- Contoh untuk user -->
+            <li class="nav-item">
+              <a class="nav-link" href="dashboard_user.html">
+                <span class="menu-icon" data-feather="home"></span>
+                <span class="menu-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="accounts_list.html">
+                <span class="menu-icon" data-feather="credit-card"></span>
+                <span class="menu-text">Akun</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories_list.html">
+                <span class="menu-icon" data-feather="list"></span>
+                <span class="menu-text">Kategori</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="transactions_list.html">
+                <span class="menu-icon" data-feather="file-text"></span>
+                <span class="menu-text">Transaksi</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="budgets_list.html">
+                <span class="menu-icon" data-feather="bar-chart-2"></span>
+                <span class="menu-text">Anggaran</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Konten Utama Daftar Transaksi -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
+        <div class="row mb-3">
+          <div class="col d-flex justify-content-between align-items-center">
+            <h4>Daftar Transaksi</h4>
+            <a href="transaction_form.html" class="btn btn-primary">Tambah Transaksi</a>
+          </div>
+        </div>
+
+        <!-- Filter dan Pencarian -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <form action="transactions_list.php" method="get" class="row gy-2 gx-3 align-items-end">
+              <div class="col-md-2 col-sm-6">
+                <label for="start_date" class="form-label">Dari Tanggal</label>
+                <input
+                  type="date"
+                  id="start_date"
+                  name="start_date"
+                  class="form-control"
+                  value=""
+                />
+              </div>
+              <div class="col-md-2 col-sm-6">
+                <label for="end_date" class="form-label">Sampai Tanggal</label>
+                <input
+                  type="date"
+                  id="end_date"
+                  name="end_date"
+                  class="form-control"
+                  value=""
+                />
+              </div>
+              <div class="col-md-2 col-sm-6">
+                <label for="type" class="form-label">Tipe</label>
+                <select id="type" name="type" class="form-select">
+                  <option value="">-- Semua --</option>
+                  <option value="income">Pemasukan</option>
+                  <option value="expense">Pengeluaran</option>
+                </select>
+              </div>
+              <div class="col-md-2 col-sm-6">
+                <label for="account_id" class="form-label">Akun</label>
+                <select id="account_id" name="account_id" class="form-select">
+                  <option value="">-- Semua --</option>
+                  <option value="1">Kas Harian</option>
+                  <option value="2">Rek Mandiri</option>
+                  <!-- Tambah akun lainnya -->
+                </select>
+              </div>
+              <div class="col-md-2 col-sm-6">
+                <label for="search_deskripsi" class="form-label">Cari Deskripsi</label>
+                <input
+                  type="text"
+                  id="search_deskripsi"
+                  name="search_deskripsi"
+                  class="form-control"
+                  placeholder="Ketik deskripsi..."
+                />
+              </div>
+              <div class="col-md-2 col-sm-6 d-grid">
+                <button type="submit" class="btn btn-outline-secondary mt-4">Filter</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Tabel Transaksi -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-body p-0">
+                <table id="transactionsTable" class="table table-hover m-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>#</th>
+                      <th>Tanggal</th>
+                      <th>Deskripsi</th>
+                      <th>Kategori</th>
+                      <th>Akun</th>
+                      <th>Tipe</th>
+                      <th>Jumlah</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>25 Mei 2025</td>
+                      <td class="td-deskripsi">Gaji Bulanan</td>
+                      <td>Gaji</td>
+                      <td>Rek Mandiri</td>
+                      <td><span class="badge bg-success">Pemasukan</span></td>
+                      <td>Rp 5.000.000</td>
+                      <td>
+                        <a href="transaction_form.html?id=1" class="btn btn-sm btn-warning">Edit</a>
+                        <button class="btn btn-sm btn-danger" disabled>Hapus</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>24 Mei 2025</td>
+                      <td class="td-deskripsi">Beli Makan Siang</td>
+                      <td>Makanan</td>
+                      <td>Dompet</td>
+                      <td><span class="badge bg-danger">Pengeluaran</span></td>
+                      <td>Rp 50.000</td>
+                      <td>
+                        <a href="transaction_form.html?id=2" class="btn btn-sm btn-warning">Edit</a>
+                        <button class="btn btn-sm btn-danger" disabled>Hapus</button>
+                      </td>
+                    </tr>
+                    <!-- Baris contoh tambahan -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script>
+    feather.replace();
+  </script>
+  <script src="assets/js/scripts.js"></script>
+</body>
+</html>

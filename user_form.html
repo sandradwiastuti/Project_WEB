@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Form User - Finance App (Admin)</title>
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Navbar & Sidebar sama seperti user_management.html -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FinanceApp</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown"
+               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Hi, Nama_Admin
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html">Profil Saya</a></li>
+              <li><a class="dropdown-item" href="settings.html">Pengaturan</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="auth/login.html?logout=1">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar Admin -->
+      <nav class="col-md-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <!-- ... menu sama seperti user_management.html ... -->
+            <li class="nav-item">
+              <a class="nav-link active" href="user_management.html">
+                <span class="menu-icon" data-feather="users"></span>
+                <span class="menu-text">Manajemen User</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Konten Utama Form User -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
+        <div class="row mb-3">
+          <div class="col">
+            <h4>Form User Baru / Edit User</h4>
+            <hr />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <!-- 
+              Contoh error server‐side:
+              <div class="alert alert-danger">Username sudah digunakan.</div>
+            -->
+            <form id="userForm" action="user_process.php" method="post" novalidate>
+              <!-- Jika edit, tambahkan input hidden id user, misalnya:
+              <input type="hidden" name="id" value="2" />
+              -->
+              <div class="mb-3">
+                <label for="full_name" class="form-label">Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="full_name"
+                  name="full_name"
+                  class="form-control"
+                  placeholder="Masukkan nama lengkap"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Nama lengkap wajib diisi.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  class="form-control"
+                  placeholder="Pilih username"
+                  required
+                  pattern="^[A-Za-z0-9_]{4,20}$"
+                />
+                <div class="invalid-feedback">
+                  Username wajib diisi (4–20 karakter).
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  placeholder="Masukkan email"
+                  required
+                />
+                <div class="invalid-feedback">
+                  Masukkan email yang valid.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="form-control"
+                  placeholder="Minimal 8 karakter"
+                  required
+                  minlength="8"
+                />
+                <div class="invalid-feedback">
+                  Password wajib diisi (minimal 8 karakter).
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="confirm_password" class="form-label">Konfirmasi Password</label>
+                <input
+                  type="password"
+                  id="confirm_password"
+                  name="confirm_password"
+                  class="form-control"
+                  placeholder="Ketik ulang password"
+                  required
+                  minlength="8"
+                />
+                <div class="invalid-feedback">
+                  Konfirmasi password wajib diisi dan sama.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select id="role" name="role" class="form-select" required>
+                  <option value="" disabled selected>-- Pilih Role --</option>
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <div class="invalid-feedback">
+                  Role wajib dipilih.
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Simpan</button>
+              <a href="user_management.html" class="btn btn-secondary">Batal</a>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="assets/js/scripts.js"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>

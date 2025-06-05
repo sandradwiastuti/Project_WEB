@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard - Finance App (Admin)</title>
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <!-- Navbar Atas -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">FinanceApp</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarMenu"
+        aria-controls="navbarMenu"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="userDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Hi, Nama_Admin
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li><a class="dropdown-item" href="profile.html">Profil Saya</a></li>
+              <li><a class="dropdown-item" href="settings.html">Pengaturan</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item text-danger" href="auth/login.html?logout=1">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar Admin (Ekstra: Manajemen User) -->
+      <nav class="col-md-2 d-md-block bg-light sidebar collapse" id="sidebarMenu">
+        <div class="position-sticky pt-3">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="dashboard_admin.html">
+                <span class="menu-icon" data-feather="home"></span>
+                <span class="menu-text">Dashboard</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="accounts_list.html">
+                <span class="menu-icon" data-feather="credit-card"></span>
+                <span class="menu-text">Akun</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="categories_list.html">
+                <span class="menu-icon" data-feather="list"></span>
+                <span class="menu-text">Kategori</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="transactions_list.html">
+                <span class="menu-icon" data-feather="file-text"></span>
+                <span class="menu-text">Transaksi</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="budgets_list.html">
+                <span class="menu-icon" data-feather="bar-chart-2"></span>
+                <span class="menu-text">Anggaran</span>
+              </a>
+            </li>
+            <!-- Tambahan menu untuk admin -->
+            <li class="nav-item">
+              <a class="nav-link" href="user_management.html">
+                <span class="menu-icon" data-feather="users"></span>
+                <span class="menu-text">Manajemen User</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Konten Utama Admin -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
+        <div class="row mb-4">
+          <div class="col">
+            <h2 class="fw-bold">Dashboard (Admin)</h2>
+            <hr />
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <!-- Total Pengguna Terdaftar -->
+          <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h6>Total Pengguna</h6>
+                <h2 class="fw-bold">150</h2>
+              </div>
+            </div>
+          </div>
+          <!-- Total Transaksi Keseluruhan -->
+          <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h6>Total Transaksi</h6>
+                <h2 class="fw-bold">2.300</h2>
+              </div>
+            </div>
+          </div>
+          <!-- Pemasukan Keseluruhan -->
+          <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h6>Pemasukan Keseluruhan</h6>
+                <h2 class="fw-bold">Rp 25.000.000</h2>
+              </div>
+            </div>
+          </div>
+          <!-- Pengeluaran Keseluruhan -->
+          <div class="col-lg-3 col-md-6 mb-3">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h6>Pengeluaran Keseluruhan</h6>
+                <h2 class="fw-bold">Rp 18.500.000</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grafik Admin: Transaksi per Bulan -->
+        <div class="row mb-4">
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h6 class="mb-0">Grafik Transaksi per Bulan</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="chartAdminTransactions" height="100"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contoh Daftar User Terbaru (Admin) -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card shadow-sm">
+              <div class="card-header">
+                <h6 class="mb-0">User Terbaru</h6>
+              </div>
+              <div class="card-body p-0">
+                <table class="table table-hover align-middle m-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>#</th>
+                      <th>Username</th>
+                      <th>Nama Lengkap</th>
+                      <th>Email</th>
+                      <th>Role</th>
+                      <th>Terdaftar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>user01</td>
+                      <td>Asep Nurcahyo</td>
+                      <td>asep@contoh.com</td>
+                      <td><span class="badge bg-secondary">User</span></td>
+                      <td>10 Mei 2025</td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>admin02</td>
+                      <td>Nina Permata</td>
+                      <td>nina@contoh.com</td>
+                      <td><span class="badge bg-primary">Admin</span></td>
+                      <td>9 Mei 2025</td>
+                    </tr>
+                    <!-- Tambah baris contoh lain -->
+                  </tbody>
+                </table>
+                <div class="text-end p-3">
+                  <a href="user_management.html" class="btn btn-sm btn-outline-primary">
+                    Kelola Semua Pengguna
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    feather.replace();
+    document.addEventListener('DOMContentLoaded', function () {
+      const ctx = document.getElementById('chartAdminTransactions').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu'],
+          datasets: [{
+            label: 'Total Transaksi',
+            data: [120,150,130,200,180,210,190,230],
+            borderColor: 'rgba(13, 110, 253, 0.7)',
+            backgroundColor: 'rgba(13, 110, 253, 0.2)',
+            fill: true
+          }]
+        },
+        options: { responsive:true, scales:{ y:{ beginAtZero:true } } }
+      });
+    });
+  </script>
+  <script src="assets/js/scripts.js"></script>
+</body>
+</html>
